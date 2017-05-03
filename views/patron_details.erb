@@ -1,1 +1,22 @@
-<h1>Individual Patron:  <%= @patron.name %></h1>
+<h1>Patron:  <%= @patron.name %></h1>
+<h1>Checkout history:  <%= @patron.book_history %></h1>
+<h1>Current Books:  <%= @patron.current_books %></h1>
+<% if @patron.current_books != "" %>
+    <h3>Due date:  <%= @patron.due_date %></h3>
+<% end %>
+
+
+<h3>Check out a book</h3>
+
+<form action="/books" method="post">
+  <label for="book_id">Select a Book</label>
+<select id='book_id' name='book_id' type='text'>
+  <% if @books.any? %>
+    <% @books.each() do |book| %>
+      <option value="<%= book.id()%>"> <%= book.name() %> </option>
+    <% end %>
+  <% end %>
+</select>
+<br>
+  <button type="submit">check out book</button>
+</form>

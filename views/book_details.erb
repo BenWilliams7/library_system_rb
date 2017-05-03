@@ -1,0 +1,9 @@
+<h1>Book Title: <%= @book.title %></h1>
+
+<h1>Book Author: <%= @book.authors %></h1>
+
+<h1>Checked out? <%= @book.checkout %></h1>
+<% if @book.checkout == true %>
+  By whom? <%= @book.patron_id %>
+  Due date: <%= @book.due_date %>
+<% end %>

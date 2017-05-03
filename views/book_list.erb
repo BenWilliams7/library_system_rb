@@ -1,1 +1,21 @@
 <h1>Book List</h1>
+
+<% if @books.any?() %>
+<p>Click on a book to see its status or something:</p>
+
+<ul>
+  <% @books.each do |book| %>
+  <li><a href="/books/<%= book.id() %>"><%= book.title() %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no books yet!</p>
+<% end %>
+<hr>
+<form action="/book/add">
+  <button type="submit" class="btn btn-success" name="button">add a book</button>
+</form>
+<br>
+<form action="/">
+  <button type="submit" class="btn btn-info" name="button">Return Home</button>
+</form>

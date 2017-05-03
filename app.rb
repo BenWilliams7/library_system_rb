@@ -18,9 +18,6 @@ get('/patron_list') do
   erb(:patron_list)
 end
 
-get('/book_list') do
-  erb(:book_list)
-end
 
 get('/patron/add') do
   erb(:patron_form)
@@ -40,8 +37,36 @@ post('/patrons') do
 end
 
 get('/patrons/:id') do
-  # @patrons = Patron.all
+  @books = Book.all
   @patron = Patron.find(params.fetch('id').to_i)
-# binding.pry
   erb(:patron_details)
+end
+
+get('/book_list') do
+  @books = Book.all
+  erb(:book_list)
+end
+
+get('/book/add') do
+  erb(:book_form)
+end
+
+post('/books') do
+  title = params.fetch('title')
+  authors = params.fetch('authors')
+  checkout = false
+  due_date = '2017-05-15'
+  author_id = 0
+  patron_id = 0
+  id = nil
+  @book = Book.new({:title => title, :authors => authors, :checkout => checkout, :due_date => due_date, :author_id => author_id, :patron_id => patron_id, :id => id})
+  @book.save
+  @books = Book.all
+  erb(:book_list)
+end
+
+get('/books/:id') do
+  # @books = Book.all
+  @book = Book.find(params.fetch('id').to_i)
+  erb(:book_details)
 end

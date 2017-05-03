@@ -1,7 +1,7 @@
 <h1>Patron List</h1>
 
 <% if @patrons.any?() %>
-<p>Click on a patron to see its tasks:</p>
+<p>Click on a patron to see their library details:</p>
 
 <ul>
   <% @patrons.each do |patron| %>
@@ -11,7 +11,11 @@
 <% else %>
 <p>There are no patrons yet!</p>
 <% end %>
-
+<hr>
 <form action="/patron/add">
   <button type="submit" class="btn btn-success" name="button">add a patron account</button>
+</form>
+<br>
+<form action="/">
+  <button type="submit" class="btn btn-info" name="button">Return Home</button>
 </form>
