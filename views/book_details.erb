@@ -7,3 +7,6 @@
   By whom? <%= @book.patron_id %>
   Due date: <%= @book.due_date %>
 <% end %>
+<form action="/book_list">
+  <button type="submit" class="btn btn-info" name="button">Back</button>
+</form>
