@@ -9,14 +9,14 @@
 <h3>Check out a book</h3>
 
 <form action="/books" method="post">
-  <label for="book_id">Select a Book</label>
-<select id='book_id' name='book_id' type='text'>
-  <% if @books.any? %>
-    <% @books.each() do |book| %>
-      <option value="<%= book.id()%>"> <%= book.name() %> </option>
-    <% end %>
-  <% end %>
-</select>
-<br>
-  <button type="submit">check out book</button>
-</form>
+   <input type="hidden" name="_method" value="patch">
+   <% @books.each() do |book| %>
+     <div class="checkbox">
+       <label>
+         <input type="checkbox" name="book_ids[]" value="<%= book.id() %>"><%= book.title() %>
+       </label>
+     </div>
+   <% end %>
+   <br>
+   <button type="submit">check out book</button>
+ </form>

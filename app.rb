@@ -38,6 +38,7 @@ end
 
 get('/patrons/:id') do
   @books = Book.all
+# binding.pry
   @patron = Patron.find(params.fetch('id').to_i)
   erb(:patron_details)
 end
