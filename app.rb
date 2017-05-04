@@ -78,3 +78,15 @@ delete("/books/:id") do
   @books = Book.all
   erb(:book_list)
 end
+
+get('/title_book_search') do
+  search_title = params.fetch('search_title')
+  @books = Book.title_search(params.fetch("search_title"))
+  erb(:title_search_results)
+end
+
+get('/author_book_search') do
+  search_author = params.fetch('search_author')
+  @book = Book.author_search(params.fetch("search_author"))
+  erb(:author_search_results)
+end

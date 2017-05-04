@@ -1,5 +1,18 @@
-<h1>Book List</h1>
 
+<h1>Book Search</h1>
+<form action="/title_book_search">
+  <label for="search_title">Search by title:</label>
+  <input type="text" name="search_title"><br>
+  <button type="submit" class="btn btn-danger" name="button">Search</button>
+</form>
+<form action="/author_book_search">
+  <label for="search_title">Search by author:</label>
+  <input type="text" name="search_author"><br>
+  <button type="submit" class="btn btn-danger" name="button">Search</button>
+</form>
+<hr>
+
+<h1>Book List</h1>
 <% if @books.any?() %>
 <p>Click on a book to see its status or something:</p>
 

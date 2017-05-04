@@ -48,4 +48,18 @@ class Book
     DB.exec("DELETE FROM book WHERE id = #{self.id()};")
   end
 
+  def Book.title_search(query)
+    found_books = DB.exec("SELECT * FROM book WHERE title LIKE '#{query}%';")
+    books = []
+    found_books.each() do |book|
+      title = book.fetch('title')
+      authors = book.fetch('authors')
+      checkout = book.fetch('checkout')
+      due_date = book.fetch('due_date')
+      id = book.fetch('id').to_i
+      books.push(Book.new({:title => title, :authors => authors, :checkout => checkout, :due_date => due_date, :id => id}))
+    end
+    books
+  end
+
 end

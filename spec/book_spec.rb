@@ -50,4 +50,24 @@ describe(Book) do
       expect(Book.all()).to(eq([book2]))
     end
   end
+
+  describe(".find") do
+    it('returns book by id') do
+      book1 = Book.new({:title => "The Hobbit", :authors => "Tolkien", :checkout => false, :due_date => "2017-05-10", :id => 1})
+      book1.save()
+      book2 = Book.new({:title => "The Hobbit", :authors => "Tolkien", :checkout => false, :due_date => "2017-05-10", :id => 1})
+      book2.save()
+      expect(Book.find(book1.id)).to(eq(book1))
+    end
+  end
+
+  describe(".title_search") do
+    it('returns book by id') do
+      book1 = Book.new({:title => "The Hobbit", :authors => "Tolkien", :checkout => false, :due_date => "2017-05-10", :id => 1})
+      book1.save()
+      book2 = Book.new({:title => "The Lord of the Rings", :authors => "Tolkien", :checkout => false, :due_date => "2017-05-10", :id => 1})
+      book2.save()
+      expect(Book.title_search("The H")).to(eq([book1]))
+    end
+  end
 end
