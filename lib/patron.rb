@@ -43,5 +43,4 @@ class Patron
     end
     found_patron
   end
-
 end

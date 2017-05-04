@@ -39,4 +39,15 @@ describe(Book) do
       expect(book1).to(eq(book2))
     end
   end
+
+  describe("#delete") do
+    it("lets you delete a book from the database") do
+      book = Book.new({:title => "The Hobbit", :authors => "Tolkien", :checkout => false, :due_date => "2017-05-10", :id => 1})
+      book.save()
+      book2 = Book.new({:title => "The Hobbit", :authors => "Tolkien", :checkout => false, :due_date => "2017-05-10", :id => 1})
+      book2.save()
+      book.delete()
+      expect(Book.all()).to(eq([book2]))
+    end
+  end
 end

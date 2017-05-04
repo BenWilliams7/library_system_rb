@@ -71,3 +71,10 @@ get('/books/:id') do
   @book = Book.find(params.fetch('id').to_i)
   erb(:book_details)
 end
+
+delete("/books/:id") do
+  @book = Book.find(params.fetch('id').to_i)
+  @book.delete
+  @books = Book.all
+  erb(:book_list)
+end
