@@ -74,4 +74,10 @@ class Patron
     end
     patron_books
   end
+
+  def return_book(attributes)
+    attributes.fetch(:book_ids, []).each do |book_id|
+      DB.exec("ALTER TABLE book_patron DROP VALUES (#{book_id}, #{self.id}) WHERE id = #{self.id};")
+    end
+  end
 end

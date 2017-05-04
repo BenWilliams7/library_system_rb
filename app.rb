@@ -58,6 +58,25 @@ patch('/patrons/:id') do
   erb(:patron_details)
 end
 
+get('/patrons/:id/return_book') do
+  @books = Book.all
+# binding.pry
+  @patron = Patron.find(params.fetch('id').to_i)
+  erb(:patron_details)
+end
+
+patch('/patrons/:id/return_book') do
+  book_id = params.fetch('id').to_i
+binding.pry
+  @patron = Patron.find(params.fetch('id').to_i)
+  @patron.return_book(:book_ids => book_id)
+  book = Book.find(book_id)
+  book.update({:checkout => "no"})
+  @book = book
+  @books = Book.all
+  erb(:patron_details)
+end
+
 get('/book_list') do
   @books = Book.all
   erb(:book_list)

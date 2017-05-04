@@ -30,9 +30,10 @@
 
   <ul>
     <% @patron.books.each do |book| %>
-      <li><%= book.title %></li>
+      <li><%= book.title %><br>
     <% end %>
   </ul>
+
 <% else %>
   <p>There are no books checked out yet! </p>
 <% end %>
