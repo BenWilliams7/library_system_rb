@@ -5,22 +5,36 @@
     <h3>Due date:  <%= @patron.due_date %></h3>
 <% end %>
 
-
+<% if @books.any? %>
 <h3>Check out a book</h3>
 
-<form action="/books" method="post">
-   <input type="hidden" name="_method" value="patch">
-   <% @books.each() do |book| %>
-     <div class="checkbox">
-       <label>
-         <input type="checkbox" name="book_ids[]" value="<%= book.id() %>"><%= book.title() %>
-       </label>
-     </div>
-   <% end %>
-   <br>
-   <button type="submit">check out book</button>
- </form>
+<form action="/patrons/<%= @patron.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% @books.each do |book| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="book_ids[]" value="<%= book.id %>"><%= book.title %>
+      </label>
+    </div>
+  <% end %>
+  <br>
+  <button class="btn btn-info" type="submit">check out book</button>
+</form>
+<% end %>
+
 <br>
 <form action="/patron_list">
   <button type="submit" class="btn btn-info" name="button">Back</button>
 </form>
+
+<% if @patron.books.any? %>
+  <h3>Here are all the books currently checked out:</h3>
+
+  <ul>
+    <% @patron.books.each do |book| %>
+      <li><%= book.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no books checked out yet! </p>
+<% end %>

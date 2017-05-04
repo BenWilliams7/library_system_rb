@@ -44,14 +44,18 @@ class Patron
     found_patron
   end
 
+  define_method(:delete) do
+    DB.exec("DELETE FROM book_patron WHERE patron_id = #{self.id()};")
+    DB.exec("DELETE FROM patron WHERE id = #{self.id()};")
+  end
+
   define_method(:update) do |attributes|
     @name = attributes.fetch(:name, @name)
     DB.exec("UPDATE patron SET name = '#{@name}' WHERE id = #{self.id};")
 
     attributes.fetch(:book_ids, []).each do |book_id|
-      result = DB.exec("INSERT INTO book_patron (book_id, patron_id) VALUES (#{book_id}, #{self.id}) returning patron_id;")
+      DB.exec("INSERT INTO book_patron (book_id, patron_id) VALUES (#{book_id}, #{self.id});")
 # binding.pry
-      result
     end
   end
 
@@ -67,7 +71,7 @@ class Patron
       checkout = book[0]['checkout']
       due_date = book[0]['due_date']
       patron_books.push(Book.new({:title => title, :authors => authors, :checkout => checkout, :due_date => due_date, :id => id}))
-      binding.pry
+      # binding.pry
     end
     patron_books
   end

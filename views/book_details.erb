@@ -7,11 +7,12 @@
   By whom? <%= @book.patron_id %>
   Due date: <%= @book.due_date %>
 <% end %>
+
 <form action="/books/<%= @book.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">
-
   <button class="btn btn-success" type="submit">Delete book</button>
 </form><br>
+
 <form action="/book_list">
   <button type="submit" class="btn btn-info" name="button">Back</button>
 </form>

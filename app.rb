@@ -43,6 +43,16 @@ get('/patrons/:id') do
   erb(:patron_details)
 end
 
+patch('/patrons/:id') do
+  # @patrons = Patron.all
+  patron_id = params.fetch("id").to_i
+  @patron = Patron.find(patron_id)
+  book_ids = (params.fetch("book_ids")).map {|book_id| book_id.to_i}
+  @patron.update({:book_ids => book_ids})
+  @books = Book.all
+  erb(:patron_details)
+end
+
 get('/book_list') do
   @books = Book.all
   erb(:book_list)
