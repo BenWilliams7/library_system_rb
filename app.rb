@@ -67,7 +67,6 @@ post('/books') do
 end
 
 get('/books/:id') do
-  # @books = Book.all
   @book = Book.find(params.fetch('id').to_i)
   erb(:book_details)
 end
@@ -87,6 +86,6 @@ end
 
 get('/author_book_search') do
   search_author = params.fetch('search_author')
-  @book = Book.author_search(params.fetch("search_author"))
+  @books = Book.author_search(params.fetch("search_author"))
   erb(:author_search_results)
 end

@@ -1,1 +1,7 @@
 <h1>Author Search Results</h1>
+
+<ul>
+  <% @books.each do |book| %>
+  <li><a href="/books/<%= book.id() %>"><%= book.authors() %>, <%= book.title() %></a></li>
+  <% end %>
+</ul>

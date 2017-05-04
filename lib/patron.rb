@@ -43,4 +43,32 @@ class Patron
     end
     found_patron
   end
+
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    DB.exec("UPDATE patron SET name = '#{@name}' WHERE id = #{self.id};")
+
+    attributes.fetch(:book_ids, []).each do |book_id|
+      result = DB.exec("INSERT INTO book_patron (book_id, patron_id) VALUES (#{book_id}, #{self.id}) returning patron_id;")
+# binding.pry
+      result
+    end
+  end
+
+  define_method(:books) do
+    patron_books = []
+    results = DB.exec("SELECT book_id FROM book_patron WHERE patron_id = #{self.id()};")
+    results.each() do |result|
+      book_id = result["book_id"].to_i
+      book = DB.exec("SELECT * FROM book WHERE id = #{book_id};")
+      id = book[0]['id'].to_i
+      title = book[0]["title"]
+      authors = book[0]['authors']
+      checkout = book[0]['checkout']
+      due_date = book[0]['due_date']
+      patron_books.push(Book.new({:title => title, :authors => authors, :checkout => checkout, :due_date => due_date, :id => id}))
+      binding.pry
+    end
+    patron_books
+  end
 end
