@@ -38,27 +38,23 @@ end
 
 get('/patrons/:id') do
   @books = Book.all
-# binding.pry
   @patron = Patron.find(params.fetch('id').to_i)
   erb(:patron_details)
 end
 
 patch('/patrons/:id') do
-  # @patrons = Patron.all
   patron_id = params.fetch("id").to_i
   @patron = Patron.find(patron_id)
   book_ids = (params.fetch("book_ids")).map{|book_id| book_id.to_i}
   @patron.update({:book_ids => book_ids})
   book = (params.fetch("book_ids")).map{|book_id| book_id.to_i}
-binding.pry
   book_ids.each do |id|
     book = Book.find(id)
   end
   book.update({:checkout => "yes"})
   @book = book
-
-  # @book.update(true)
   @books = Book.all
+# binding.pry
   erb(:patron_details)
 end
 

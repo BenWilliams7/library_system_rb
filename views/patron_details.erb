@@ -9,7 +9,9 @@
   <% @books.each do |book| %>
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="book_ids[]" value="<%= book.id %>"><%= book.title %>
+        <% if book.checkout == "no" %>
+          <input type="checkbox" name="book_ids[]" value="<%= book.id %>"><%= book.title %>
+        <% end %>
       </label>
     </div>
   <% end %>
