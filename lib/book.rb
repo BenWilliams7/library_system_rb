@@ -77,4 +77,13 @@ class Book
     books
   end
 
+  define_method(:update) do |attributes|
+    @checkout = attributes.fetch(:checkout, @checkout)
+    # DB.exec("UPDATE book SET title = '#{@title}' WHERE id = #{self.id};")
+    DB.exec("UPDATE book SET checkout = '#{@checkout}' WHERE id = #{self.id};")
+    # @name = attributes.fetch(:name, @name)
+    # DB.exec("UPDATE patron SET name = '#{@name}' WHERE id = #{self.id};")
+# binding.pry
+  end
+
 end

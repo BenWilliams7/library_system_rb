@@ -1,9 +1,5 @@
 <h1>Patron:  <%= @patron.name %></h1>
 <h1>Checkout history:  <%= @patron.book_history %></h1>
-<h1>Current Books:  <%= @patron.current_books %></h1>
-<% if @patron.current_books != "" %>
-    <h3>Due date:  <%= @patron.due_date %></h3>
-<% end %>
 
 <% if @books.any? %>
 <h3>Check out a book</h3>

@@ -55,7 +55,6 @@ class Patron
 
     attributes.fetch(:book_ids, []).each do |book_id|
       DB.exec("INSERT INTO book_patron (book_id, patron_id) VALUES (#{book_id}, #{self.id});")
-# binding.pry
     end
   end
 
